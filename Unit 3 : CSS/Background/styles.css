@@ -1,0 +1,55 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+    background-color: #f4f4f4;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Common Styles for Divs */
+div {
+    width: 300px;
+    height: 200px;
+    margin: 10px auto;
+    border: 1px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-weight: bold;
+    text-align: center;
+    color: white;
+}
+
+/* Background Examples */
+.background-repeat {
+    background-image: url("Jan 17/image.png");
+    background-repeat: repeat;
+    background-size: auto;
+}
+
+.background-no-repeat {
+    background-image: url("Jan 17/image.png");
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.background-repeat-x {
+    background-image: url("Jan 17/image.png");
+    background-repeat: repeat-x;
+}
+
+.background-repeat-y {
+    background-image: url("Jan 17/image.png");
+    background-repeat: repeat-y;
+}

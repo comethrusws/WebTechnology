@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h2><span class="dot">•</span> Registration Form <span class="dot">•</span></h2>
+            <button class="close-btn">×</button>
+        </div>
+        <form class="registration-form">
+            <div class="input-group">
+                <input type="text" placeholder="Name *" required>
+                <div class="underline"></div>
+            </div>
+            <div class="input-group">
+                <input type="email" placeholder="Email address *" required>
+                <div class="underline"></div>
+            </div>
+            <div class="input-group">
+                <input type="text" placeholder="Country" required>
+                <div class="underline"></div>
+            </div>
+            <div class="input-group">
+                <input type="tel" placeholder="Phone *" required>
+                <div class="underline"></div>
+            </div>
+            <div class="input-group password-container">
+                <input type="password" placeholder="Password *" id="password" required>
+                <div class="underline"></div>
+                <button type="button" class="password-toggle" onclick="showpw()">
+                    <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </button>
+            </div>
+            <div class="terms">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</label>
+            </div>
+            <button type="submit" class="create-account">CREATE ACCOUNT</button>
+            <p class="login-link">Already have an account? <a href="signin.html">Sign in</a></p>
+        </form>
+    </div>
+
+    
+    <script src="script.js">
+    </script>
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Basic list styling */
+        .list-section {
+            margin-bottom: 40px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        /* Custom unordered list styles */
+        .custom-disc {
+            list-style-type: disc;
+        }
+
+        .custom-circle {
+            list-style-type: circle;
+        }
+
+        .custom-square {
+            list-style-type: square;
+        }
+
+        /* Custom ordered list styles */
+        .decimal-list {
+            list-style-type: decimal;
+        }
+
+        .roman-list {
+            list-style-type: upper-roman;
+        }
+
+        .alpha-list {
+            list-style-type: lower-alpha;
+        }
+
+        /* Custom description list styles */
+        dt {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        dd {
+            margin-left: 20px;
+            color: #666;
+        }
+
+        /* Custom nested list styling */
+        .nested-list li {
+            margin: 10px 0;
+        }
+
+        .nested-list ul, 
+        .nested-list ol {
+            margin: 10px 0 10px 20px;
+        }
+
+        /* Custom icon list */
+        .icon-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .icon-list li {
+            padding-left: 25px;
+            position: relative;
+            margin: 10px 0;
+        }
+
+        .icon-list li:before {
+            content: "✔";
+            position: absolute;
+            left: 0;
+            color: green;
+        }
+
+        /* Horizontal list */
+        .horizontal-list {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .horizontal-list li {
+            background-color: #f0f0f0;
+            padding: 5px 15px;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>different Types of HTML Lists</h1>
+
+    <div class="list-section">
+        <h2>Unordered Lists</h2>
+        <ul class="custom-disc">
+            <li>Disc bullet style</li>
+            <li>Default unordered list style</li>
+            <li>Most commonly used</li>
+        </ul>
+
+        <ul class="custom-circle">
+            <li>Circle bullet style</li>
+            <li>Hollow circle markers</li>
+            <li>Good for secondary lists</li>
+        </ul>
+
+        <ul class="custom-square">
+            <li>Square bullet style</li>
+            <li>Square markers</li>
+            <li>Alternative to disc style</li>
+        </ul>
+    </div>
+
+    <div class="list-section">
+        <h2>Ordered Lists</h2>
+        <ol class="decimal-list">
+            <li>Standard numbered list</li>
+            <li>Automatically numbered</li>
+            <li>Best for sequential steps</li>
+        </ol>
+
+        <ol class="roman-list">
+            <li>Upper Roman numerals</li>
+            <li>Formal appearance</li>
+            <li>Good for document sections</li>
+        </ol>
+
+        <ol class="alpha-list">
+            <li>Alphabetical ordering</li>
+            <li>Lower case letters</li>
+            <li>Alternative to numbers</li>
+        </ol>
+    </div>
+
+    <div class="list-section">
+        <h2>Description List</h2>
+        <dl>
+            <dt>HTML</dt>
+            <dd>HyperText Markup Language - the standard markup language for web pages</dd>
+
+            <dt>CSS</dt>
+            <dd>Cascading Style Sheets - the language used to style HTML documents</dd>
+
+            <dt>JavaScript</dt>
+            <dd>A programming language that enables interactive web pages</dd>
+        </dl>
+    </div>
+
+    <div class="list-section">
+        <h2>Nested List</h2>
+        <ul class="nested-list">
+            <li>Front-end Development
+                <ul>
+                    <li>HTML
+                        <ol>
+                            <li>Elements</li>
+                            <li>Attributes</li>
+                        </ol>
+                    </li>
+                    <li>CSS
+                        <ol>
+                            <li>Selectors</li>
+                            <li>Properties</li>
+                        </ol>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <div class="list-section">
+        <h2>Custom Icon List</h2>
+        <ul class="icon-list">
+            <li>Custom icon using pseudo-element</li>
+            <li>Checkmark style bullets</li>
+            <li>Fully customizable icons</li>
+        </ul>
+    </div>
+
+    <div class="list-section">
+        <h2>Horizontal List</h2>
+        <ul class="horizontal-list">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+            <li>Item 5</li>
+        </ul>
+    </div>
+</body>
+</html>

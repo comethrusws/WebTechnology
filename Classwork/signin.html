@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .form-container {
+            width: 460px;
+            height: 620px;  
+
+        }
+        
+        .form-header {
+            margin-bottom: 48px;  
+        }
+        
+        .input-group {
+            margin-bottom: 32px; 
+        }
+        
+        .forgot-password {
+            text-align: right;
+            margin-top: -20px;
+            margin-bottom: 48px;
+        }
+        
+        .forgot-password a {
+            color: #00c4b4;
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .forgot-password a:hover {
+            text-decoration: underline;
+        }
+        
+        .create-account {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <div class="form-header">
+            <h2><span class="dot">•</span> Sign In <span class="dot">•</span></h2>
+            <button class="close-btn">×</button>
+        </div>
+        <form class="registration-form">
+            <div class="input-group">
+                <input type="email" placeholder="Email address *" required>
+                <div class="underline"></div>
+            </div>
+            <div class="input-group password-container">
+                <input type="password" placeholder="Password *" id="password" required>
+                <div class="underline"></div>
+                <button type="button" class="password-toggle" onclick="showpw()">
+                    <svg id="eye-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                        <circle cx="12" cy="12" r="3"></circle>
+                    </svg>
+                </button>        
+            </div>
+
+            <div class="terms" style="margin-top: 60px;">
+                <input type="checkbox" id="terms" required>
+                <label for="terms">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</label>
+            </div>
+
+            <div class="forgot-password">
+                <a href="#">Forgot Password?</a>
+            </div>
+            <button type="submit" class="create-account">SIGN IN</button>
+            <p class="login-link">Don't have an account? <a href="index.html">Register</a></p>
+        </form>
+
+    </div>
+    <script src="script.js">
+        function showpw() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eye-icon');
+          
+            if (passwordInput.type === 'password') {
+              passwordInput.type = 'text';
+          
+              eyeIcon.innerHTML = `
+                <path d="M17.94 17.94A10.94 10.94 0 0 0 12 16c-7 0-11-8-11-8a21.39 21.39 0 0 1 4.46-5.94"></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              `;
+            } else {
+              passwordInput.type = 'password';
+          
+              eyeIcon.innerHTML = `
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              `;
+            }
+          }
+        
+        
+        document.querySelector('.registration-form').addEventListener('submit', function(e) {
+          e.preventDefault();
+          
+          let isValid = true;
+          const errors = [];
+        
+          //name ok valid
+          const nameInput = document.querySelector('input[placeholder="Name *"]');
+          if (nameInput.value.trim().length < 2) {
+              isValid = false;
+              showError(nameInput, 'Name must be at least 2 characters long');
+              errors.push('Invalid name');
+          } else {
+              removeError(nameInput);
+          }
+        
+          //mail
+          const emailInput = document.querySelector('input[placeholder="Email address *"]');
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(emailInput.value.trim())) {
+              isValid = false;
+              showError(emailInput, 'Please enter a valid email address');
+              errors.push('Invalid email');
+          } else {
+              removeError(emailInput);
+          }
+        
+          // 9841
+          const phoneInput = document.querySelector('input[placeholder="Phone *"]');
+          const phoneRegex = /^[+]?[(]?[0-9]{3}[)]?[-\s.]?[0-9]{3}[-\s.]?[0-9]{4,6}$/;
+          if (!phoneRegex.test(phoneInput.value.trim())) {
+              isValid = false;
+              showError(phoneInput, 'Please enter a valid phone number');
+              errors.push('Invalid phone');
+          } else {
+              removeError(phoneInput);
+          }
+        
+          const passwordInput = document.getElementById('password');
+          const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+          if (!passwordRegex.test(passwordInput.value)) {
+              isValid = false;
+              showError(passwordInput, 'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character');
+              errors.push('Invalid password');
+          } else {
+              removeError(passwordInput);
+          }
+        
+          const termsCheckbox = document.getElementById('terms');
+          if (!termsCheckbox.checked) {
+              isValid = false;
+              showError(termsCheckbox, 'Please accept the terms');
+              errors.push('Terms not accepted');
+          } else {
+              removeError(termsCheckbox);
+          }
+        
+          if (isValid) {
+              console.log('Form submitted successfully');
+              this.reset();
+              showSuccessMessage();
+          }
+        });
+        
+        // error handling
+        function showError(input, message) {
+          const formGroup = input.closest('.input-group') || input.closest('.terms');
+          const existingError = formGroup.querySelector('.error-message');
+          
+          if (!existingError) {
+              const errorDiv = document.createElement('div');
+              errorDiv.className = 'error-message';
+              errorDiv.textContent = message;
+              formGroup.appendChild(errorDiv);
+          }
+          
+          input.style.borderColor = '#ff3b3b';
+          if (input.nextElementSibling && input.nextElementSibling.classList.contains('underline')) {
+              input.nextElementSibling.style.backgroundColor = '#ff3b3b';
+          }
+        }
+        
+        function removeError(input) {
+          const formGroup = input.closest('.input-group') || input.closest('.terms');
+          const error = formGroup.querySelector('.error-message');
+          if (error) {
+              error.remove();
+          }
+          
+          input.style.borderColor = '';
+          if (input.nextElementSibling && input.nextElementSibling.classList.contains('underline')) {
+              input.nextElementSibling.style.backgroundColor = '#00e5bd';
+          }
+        }
+        
+        function showSuccessMessage() {
+          const existingSuccess = document.querySelector('.success-message');
+          if (existingSuccess) {
+              existingSuccess.remove();
+          }
+        
+          const successDiv = document.createElement('div');
+          successDiv.className = 'success-message';
+          successDiv.textContent = 'Registration successful!';
+          document.querySelector('.form-container').appendChild(successDiv);
+        
+          setTimeout(() => {
+              successDiv.remove();
+          }, 3000);
+        }
+        
+        document.querySelectorAll('.registration-form input').forEach(input => {
+          input.addEventListener('blur', function() {
+              if (this.required && !this.value) {
+                  showError(this, 'This field is required');
+              }
+          });
+        
+          input.addEventListener('input', function() {
+              if (this.value) {
+                  removeError(this);
+              }
+          });
+        });
+          
+    </script>
+</body>
+</html>

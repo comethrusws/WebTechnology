@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Audio/Video tag and canvas</title>
+    <style>
+        canvas {
+          border: 2px solid black;
+          display: block;
+          margin: 20px auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="aud">
+        <audio src="audio.mp3" controls loop></audio>
+    </div>
+    <br>
+
+    <video src="vid.webm" width="400" controls poster="image.png"></video>
+    <br>
+
+    <div>
+        <canvas id="canvasDemo" width="400" height="300"></canvas>
+    </div>
+
+    <div>
+        <button id="datebtn">Click me</button>
+    </div>
+  
+    <script>
+      const canvas = document.getElementById('canvasDemo');
+      const ctx = canvas.getContext('2d');
+  
+      const gradient = ctx.createLinearGradient(0, 0, 400, 0);
+      gradient.addColorStop(0, 'green');
+      gradient.addColorStop(1, 'white');
+      ctx.fillStyle = gradient;
+      ctx.fillRect(0, 0, 400, 300);
+      
+      ctx.moveTo(0, 0);
+      ctx.lineTo(400, 300);
+      ctx.stroke();
+  
+      ctx.fillStyle = 'blue';
+      ctx.fillRect(50, 50, 100, 100);
+  
+      ctx.beginPath();
+      ctx.arc(250, 150, 50, 0, Math.PI * 2);
+      ctx.fillStyle = 'yellow';
+      ctx.fill();
+      ctx.stroke();
+      
+      ctx.font = '20px Arial';
+      ctx.fillStyle = 'black';
+      ctx.fillText('Canvas Demo', 130, 280);
+  
+      document.getElementById('datebtn').addEventListener('click', function() {
+        this.innerHTML = new Date().toString();
+      });
+    </script>
+</body>
+</html>

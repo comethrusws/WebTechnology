@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Radio Button Form</title>
+</head>
+<body>
+
+  <h2>Select Your Subscription Plan</h2>
+
+  <form action="/submit" method="post">
+    <label>
+      <input type="radio" name="plan" value="free" checked>
+      Free Plan
+    </label><br>
+
+    <label>
+      <input type="radio" name="plan" value="grow">
+      Grow Plan
+    </label><br>
+
+    <label>
+      <input type="radio" name="plan" value="enterprise">
+      Enterprise Plan
+    </label><br><br>
+
+    <label for="country">Choose a country:</label><br><br>
+    
+    <select name="country" id="country" required>
+      <option value="" disabled selected>Select a country</option>
+      <option value="np">Nepal</option>
+      <option value="us">United States</option>
+      <option value="uk">United Kingdom</option>
+      <option value="in">India</option>
+      <option value="cn">China</option>
+      <option value="jp">Japan</option>
+      <option value="de">Germany</option>
+      <option value="fr">France</option>
+      <option value="au">Australia</option>
+      <option value="ca">Canada</option>
+    </select><br><br>
+
+    <button type="submit">Submit</button>
+  </form>
+
+</body>
+</html>
