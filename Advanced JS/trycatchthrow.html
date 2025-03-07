@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exception and Error Handling</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+        }
+        .success {
+            color: green;
+        }
+        .example {
+            border: 1px solid #ccc;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        button {
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Exception and Error Handling</h1>
+    
+    <div class="container">
+        <div class="example">
+            <h2>Basic try-catch</h2>
+            <button onclick="basicTryCatch()">Run Basic Try-Catch</button>
+            <p id="basic-result"></p>
+        </div>
+
+        <div class="example">
+            <h2>Custom Error with throw</h2>
+            <label for="age">Enter your age:</label>
+            <input type="number" id="age" min="0" max="150">
+            <button onclick="validateAge()">Validate Age</button>
+            <p id="age-result"></p>
+        </div>
+
+        <div class="example">
+            <h2>try-catch-finally</h2>
+            <button onclick="tryCatchFinally()">Run try-catch-finally</button>
+            <p id="finally-result"></p>
+        </div>
+
+        <div class="example">
+            <h2>Error Types</h2>
+            <select id="error-type">
+                <option value="reference">ReferenceError</option>
+                <option value="type">TypeError</option>
+                <option value="syntax">SyntaxError</option>
+                <option value="range">RangeError</option>
+            </select>
+            <button onclick="generateError()">Generate Error</button>
+            <p id="error-result"></p>
+        </div>
+    </div>
+
+    <script>
+        // Example 1: Basic try-catch
+        function basicTryCatch() {
+            const resultElement = document.getElementById('basic-result');
+            
+            try {
+                // Attempting to access a property of an undefined variable
+                const user = undefined;
+                const name = user.name;
+                resultElement.textContent = "This will not execute";
+            } catch (error) {
+                resultElement.className = 'error';
+                resultElement.textContent = `Caught an error: ${error.message}`;
+                console.error("Error details:", error);
+            }
+        }
+
+        // Example 2: Custom error with throw
+        function validateAge() {
+            const ageInput = document.getElementById('age');
+            const resultElement = document.getElementById('age-result');
+            const age = Number(ageInput.value);
+            
+            try {
+                if (isNaN(age)) {
+                    throw new Error("Please enter a valid number");
+                }
+                if (age < 0) {
+                    throw new RangeError("Age cannot be negative");
+                }
+                if (age > 150) {
+                    throw new RangeError("Age seems unrealistic");
+                }
+                
+                resultElement.className = 'success';
+                resultElement.textContent = `Valid age: ${age}`;
+            } catch (error) {
+                resultElement.className = 'error';
+                resultElement.textContent = `Error: ${error.message}`;
+            }
+        }
+
+        // Example 3: try-catch-finally
+        function tryCatchFinally() {
+            const resultElement = document.getElementById('finally-result');
+            resultElement.textContent = "";
+            
+            try {
+                resultElement.textContent += "Trying something risky... ";
+                // Generate an error
+                const result = 10 / 0;
+                resultElement.textContent += "This won't execute if there's an error";
+            } catch (error) {
+                resultElement.className = 'error';
+                resultElement.textContent += `Caught: ${error.message} `;
+            } finally {
+                resultElement.textContent += "Finally block always executes!";
+            }
+        }
+
+        // Example 4: Different types of errors
+        function generateError() {
+            const errorType = document.getElementById('error-type').value;
+            const resultElement = document.getElementById('error-result');
+            
+            try {
+                switch(errorType) {
+                    case 'reference':
+                        // Trying to access an undefined variable
+                        nonExistentVariable;
+                        break;
+                    case 'type':
+                        // Trying to call something that's not a function
+                        const notAFunction = {};
+                        notAFunction();
+                        break;
+                    case 'syntax':
+                        // Syntax errors can't be caught this way, they occur before execution
+                        // But we can use eval to create one at runtime
+                        eval('if (true) {');
+                        break;
+                    case 'range':
+                        // Creating a range error
+                        const arr = new Array(-1);
+                        break;
+                }
+            } catch (error) {
+                resultElement.className = 'error';
+                resultElement.textContent = `${error.name}: ${error.message}`;
+                console.error("Full error details:", error);
+            }
+        }
+    </script>
+</body>
+</html>

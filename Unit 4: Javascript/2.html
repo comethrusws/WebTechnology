@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Operators</title>
+</head>
+<body>
+    <h1>JavaScript Operators Demonstration</h1>
+
+    <label for="age">Enter your age:</label>
+    <input type="number" id="age" name="age">
+    <button onclick="checkAge()">Check Age</button>
+    <p id="result"></p>
+
+    <script>
+        function checkAge() {
+            let age = document.getElementById("age").value;
+            let result = (age >= 18) ? "You are an adult." : "You are not an adult.";
+            document.getElementById("result").innerText = result;
+        }
+    </script>
+    <script>
+        // Arithmetic Operators
+        let a = 10;
+        let b = 5;
+        console.log("Arithmetic Operators:");
+        console.log("a + b =", a + b); // Addition
+        console.log("a - b =", a - b); // Subtraction
+        console.log("a * b =", a * b); // Multiplication
+        console.log("a / b =", a / b); // Division
+        console.log("a % b =", a % b); // Modulus
+        console.log("a++ =", a++); // Increment
+        console.log("++a =", ++a); // Increment
+        console.log("a-- =", a--); // Decrement
+        console.log("--a =", --a); // Decrement
+
+        // Assignment Operators
+        console.log("\nAssignment Operators:");
+        let c = 20;
+        console.log("c =", c);
+        c += 10;
+        console.log("c += 10 ->", c);
+        c -= 5;
+        console.log("c -= 5 ->", c);
+        c *= 2;
+        console.log("c *= 2 ->", c);
+        c /= 5;
+        console.log("c /= 5 ->", c);
+        c %= 3;
+        console.log("c %= 3 ->", c);
+
+        // Comparison Operators
+        console.log("\nComparison Operators:");
+        console.log("a == b ->", a == b);
+        console.log("a != b ->", a != b);
+        console.log("a > b ->", a > b);
+        console.log("a < b ->", a < b);
+        console.log("a >= b ->", a >= b);
+        console.log("a <= b ->", a <= b);
+
+        // Logical Operators
+        console.log("\nLogical Operators:");
+        let x = true;
+        let y = false;
+        console.log("x && y ->", x && y);
+        console.log("x || y ->", x || y);
+        console.log("!x ->", !x);
+
+        // Bitwise Operators
+        console.log("\nBitwise Operators:");
+        let d = 5; // 0101 in binary
+        let e = 3; // 0011 in binary
+        console.log("d & e ->", d & e); // AND
+        console.log("d | e ->", d | e); // OR
+        console.log("d ^ e ->", d ^ e); // XOR
+        console.log("~d ->", ~d); // NOT
+        console.log("d << 1 ->", d << 1); // Left shift
+        console.log("d >> 1 ->", d >> 1); // Right shift
+
+        // Ternary Operator
+        console.log("\nTernary Operator:");
+        let f = 10;
+        let result = (f > 5) ? "Greater than 5" : "Less than or equal to 5";
+        console.log("f > 5 ? 'Greater than 5' : 'Less than or equal to 5' ->", result);
+
+        // Type Operators
+        console.log("\nType Operators:");
+        console.log("typeof f ->", typeof f);
+        console.log("f instanceof Number ->", f instanceof Number);
+    </script>
+</body>
+</html>

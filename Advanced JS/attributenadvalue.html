@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>brrrrrrrrrrr</title>
+    <style>
+        #container {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>hola como estas? que tu?</h1>
+    <button onclick="createImage()">Add an image to the page</button>
+    <button onclick="removeChild()">Remove last image</button>
+    <button onclick="replaceChild()">Replace last image</button>
+    <div id="container"></div>
+
+    <script>
+        function createImage() {
+            const img = document.createElement('img');
+            
+            img.setAttribute('src', 'hi.jpg');
+            img.setAttribute('width', '320');
+            img.setAttribute('height', '200');
+            img.style.margin='10px';
+            
+            img.setAttribute('class', 'dynamic-image');
+            
+            document.getElementById('container').appendChild(img);
+        }
+        
+        function removeChild() {
+            const container = document.getElementById('container');
+            const images = container.getElementsByTagName('img');
+            if (images.length > 0) {
+                container.removeChild(images[images.length - 1]);
+            } else {
+                alert("No images to remove!");
+            }
+        }
+        
+        function replaceChild() {
+            const container = document.getElementById('container');
+            const images = container.getElementsByTagName('img');
+            if (images.length > 0) {
+                const newImg = document.createElement('img');
+                newImg.setAttribute('src', 'replacement.jpg');
+                newImg.setAttribute('width', '320');
+                newImg.setAttribute('height', '200');
+                newImg.style.margin = '10px';
+                newImg.setAttribute('class', 'dynamic-image replaced');
+                
+                container.replaceChild(newImg, images[images.length - 1]);
+            } else {
+                alert("No images to replace!");
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Break and Continue Demo</title>
+</head>
+<body>
+    <h1>Supermarket Items</h1>
+    <ul id="itemList"></ul>
+
+    <script>
+        const items = [
+            { name: 'Aagan Mithai', expiryDate: '2025-02-15' },
+            { name: 'Utsav Bread', expiryDate: '2025-02-08' },
+            { name: 'NDs Eggs', expiryDate: '2025-02-17' },
+            { name: 'Top Cheese crackers', expiryDate: '2025-02-08' },
+            { name: 'Amul Butter', expiryDate: '2025-02-18' }
+        ];
+
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const tomorrowStr = tomorrow.toISOString().split('T')[0];
+
+        const itemList = document.getElementById('itemList');
+
+        items.forEach(item => {
+            if (item.expiryDate === tomorrowStr) {
+                return;
+            }
+            const listItem = document.createElement('li');
+            listItem.textContent = `${item.name} - Expiry Date: ${item.expiryDate}`;
+            itemList.appendChild(listItem);
+        });
+    </script>
+</body>
+</html>

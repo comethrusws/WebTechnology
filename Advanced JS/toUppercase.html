@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auto Uppercase Converter</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            background-color: #f5f5f5;
+        }
+        
+        .container {
+            width: 80%;
+            max-width: 600px;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        
+        textarea {
+            height: 150px;
+            resize: vertical;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Automatic Text Uppercase Converter</h1>
+        
+        <div class="input-group">
+            <label for="singleLineInput">Enter your name:</label>
+            <input type="text" id="singleLineInput" placeholder="Type here...">
+        </div>
+        
+        <div class="input-group">
+            <label for="multiLineInput">Enter message:</label>
+            <textarea id="multiLineInput" placeholder="Type multiple lines here..."></textarea>
+        </div>
+    </div>
+
+    <script>
+        function setupAutoUppercase(elementId) {
+            const element = document.getElementById(elementId);
+            
+            element.addEventListener('focus', function() {
+                this.value = this.value.toUpperCase();
+            });
+            
+            element.addEventListener('input', function() {
+                const cursorPos = this.selectionStart;
+                
+                this.value = this.value.toUpperCase();
+                this.setSelectionRange(cursorPos, cursorPos);
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setupAutoUppercase('singleLineInput');
+            setupAutoUppercase('multiLineInput');
+        });
+    </script>
+</body>
+</html></div>

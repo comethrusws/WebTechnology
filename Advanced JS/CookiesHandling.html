@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Cookie Handler</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .container {
+            background-color: #f5f5f5;
+            padding: 20px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        input, select {
+            padding: 8px;
+            margin-top: 5px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <h1>Cookie Handler Demo</h1>
+    <div class="container">
+        <h2>Visit Counter</h2>
+        <p>This counter resets every day at midnight.</p>
+        <p id="visitCount">Visits today: 0</p>
+        
+        <h2>Controls</h2>
+        <button onclick="resetCookie()">Reset Counter Now</button>
+        <button onclick="showCookieValue()">Show Current Cookie Value</button>
+        <button onclick="logAllCookies()">Log All Cookies to Console</button>
+        <button onclick="viewAllCookies()">View All Cookies</button>
+        <button onclick="viewAllCookies()">View & Manage Cookies</button>
+    </div>
+
+    <div class="container">
+        <h2>Create Custom Cookie</h2>
+        <div class="form-group">
+            <label for="cookieName">Cookie Name:</label>
+            <input type="text" id="cookieName" placeholder="Enter cookie name">
+        </div>
+        <div class="form-group">
+            <label for="cookieValue">Cookie Value:</label>
+            <input type="text" id="cookieValue" placeholder="Enter cookie value">
+        </div>
+        <div class="form-group">
+            <label for="expiryTime">Expiration:</label>
+            <select id="expiryTime">
+                <option value="end-of-day">End of day</option>
+                <option value="1">1 day</option>
+                <option value="7">7 days</option>
+                <option value="30">30 days</option>
+                <option value="custom">Custom (seconds)</option>
+            </select>
+        </div>
+        <div id="customExpiryContainer" class="form-group" style="display: none;">
+            <label for="customExpiry">Custom expiry (seconds):</label>
+            <input type="number" id="customExpiry" value="60">
+        </div>
+        <button onclick="createCustomCookie()">Create Cookie</button>
+    </div>
+
+    <script>
+        // Function to set a cookie with custom expiry
+        function setCookie(name, value, expiryDate) {
+            // Create cookie string with expiry
+            document.cookie = `${name}=${value}; expires=${expiryDate.toUTCString()}; path=/`;
+            console.log(`Cookie set: ${name}=${value}, expires: ${expiryDate.toUTCString()}`);
+        }
+
+        // Function to set a cookie that expires at the end of the day
+        function setDailyCookie(name, value) {
+            // Get the current date
+            const now = new Date();
+            
+            // Set expiry to end of the current day
+            const expiry = new Date(now);
+            expiry.setHours(23, 59, 59, 999);
+            
+            setCookie(name, value, expiry);
+        }
+
+        // Function to get a cookie value by name
+        function getCookie(name) {
+            const cookieArr = document.cookie.split(';');
+            
+            for (let i = 0; i < cookieArr.length; i++) {
+                const cookiePair = cookieArr[i].split('=');
+                const cookieName = cookiePair[0].trim();
+                
+                if (cookieName === name) {
+                    return cookiePair[1];
+                }
+            }
+            
+            // Return null if cookie not found
+            return null;
+        }
+
+        // Function to handle the visit counter
+        function handleVisitCounter() {
+            const counterName = "dailyVisitCounter";
+            let counter = getCookie(counterName);
+            
+            if (counter === null) {
+                // First visit of the day
+                counter = 1;
+            } else {
+                // Increment the counter
+                counter = parseInt(counter) + 1;
+            }
+            
+            // Update the cookie
+            setDailyCookie(counterName, counter);
+            
+            // Update the display
+            document.getElementById("visitCount").textContent = `Visits today: ${counter}`;
+        }
+
+        // Function to reset the cookie
+        function resetCookie() {
+            setDailyCookie("dailyVisitCounter", 0);
+            document.getElementById("visitCount").textContent = "Visits today: 0";
+            alert("Counter has been reset!");
+        }
+
+        // Function to show the current cookie value
+        function showCookieValue() {
+            const counter = getCookie("dailyVisitCounter");
+            alert(`Current cookie value: ${counter || "Cookie not set"}`);
+        }
+
+        // Function to log all cookies to console
+        function logAllCookies() {
+            console.log("All cookies:");
+            const cookieArr = document.cookie.split(';');
+            
+            if (cookieArr.length === 1 && cookieArr[0] === "") {
+                console.log("No cookies found");
+                alert("No cookies found. Check console for details.");
+                return;
+            }
+            
+            cookieArr.forEach((cookie, index) => {
+                const [name, value] = cookie.split('=').map(part => part.trim());
+                console.log(`${index + 1}. ${name}: ${value}`);
+            });
+            
+            alert("Cookies logged to console. Please check the Application tab to see all details.");
+        }
+
+        // Function to create a custom cookie
+        function createCustomCookie() {
+            const name = document.getElementById("cookieName").value.trim();
+            const value = document.getElementById("cookieValue").value.trim();
+            const expiryType = document.getElementById("expiryTime").value;
+            
+            if (!name || !value) {
+                alert("Please enter both cookie name and value");
+                return;
+            }
+            
+            let expiryDate = new Date();
+            
+            // Set expiry based on selection
+            if (expiryType === "end-of-day") {
+                expiryDate.setHours(23, 59, 59, 999);
+            } else if (expiryType === "custom") {
+                const seconds = parseInt(document.getElementById("customExpiry").value);
+                expiryDate = new Date(expiryDate.getTime() + seconds * 1000);
+            } else {
+                const days = parseInt(expiryType);
+                expiryDate = new Date(expiryDate.getTime() + days * 24 * 60 * 60 * 1000);
+            }
+            
+            setCookie(name, value, expiryDate);
+            alert(`Cookie "${name}" created successfully! Check console for details.`);
+        }
+
+        // Show/hide custom expiry input based on dropdown selection
+        document.getElementById("expiryTime").addEventListener("change", function() {
+            const customExpiryContainer = document.getElementById("customExpiryContainer");
+            customExpiryContainer.style.display = this.value === "custom" ? "block" : "none";
+        });
+
+        // Run when page loads
+        window.onload = handleVisitCounter;
+
+        // Function to view all cookies in a formatted way
+        function viewAllCookies() {
+            const cookiesContainer = document.createElement('div');
+            cookiesContainer.className = 'cookies-list';
+            
+            const cookiesArr = document.cookie.split(';');
+            
+            if (cookiesArr.length === 1 && cookiesArr[0] === "") {
+                cookiesContainer.innerHTML = '<p>No cookies found.</p>';
+            } else {
+                const table = document.createElement('table');
+                table.style.width = '100%';
+                table.style.borderCollapse = 'collapse';
+                table.innerHTML = `
+                    <tr>
+                        <th style="text-align: left; padding: 8px; border-bottom: 1px solid #ddd;">Name</th>
+                        <th style="text-align: left; padding: 8px; border-bottom: 1px solid #ddd;">Value</th>
+                        <th style="text-align: center; padding: 8px; border-bottom: 1px solid #ddd;">Action</th>
+                    </tr>
+                `;
+                
+                cookiesArr.forEach((cookie) => {
+                    if (cookie.trim() !== '') {
+                        const [name, value] = cookie.split('=').map(part => part.trim());
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td style="padding: 8px; border-bottom: 1px solid #ddd;">${name}</td>
+                            <td style="padding: 8px; border-bottom: 1px solid #ddd;">${value}</td>
+                            <td style="padding: 8px; border-bottom: 1px solid #ddd; text-align: center;">
+                                <button onclick="deleteCookie('${name}')" class="delete-btn">Delete</button>
+                            </td>
+                        `;
+                        table.appendChild(row);
+                    }
+                });
+                
+                cookiesContainer.appendChild(table);
+            }
+            
+            // Display in modal
+            const modal = document.createElement('div');
+            modal.style.position = 'fixed';
+            modal.style.left = '0';
+            modal.style.top = '0';
+            modal.style.width = '100%';
+            modal.style.height = '100%';
+            modal.style.backgroundColor = 'rgba(0,0,0,0.5)';
+            modal.style.display = 'flex';
+            modal.style.justifyContent = 'center';
+            modal.style.alignItems = 'center';
+            
+            const modalContent = document.createElement('div');
+            modalContent.style.backgroundColor = 'white';
+            modalContent.style.padding = '20px';
+            modalContent.style.borderRadius = '5px';
+            modalContent.style.maxWidth = '80%';
+            modalContent.style.width = '600px';
+            modalContent.style.maxHeight = '80%';
+            modalContent.style.overflow = 'auto';
+            
+            const closeButton = document.createElement('button');
+            closeButton.innerText = 'Close';
+            closeButton.style.marginTop = '20px';
+            closeButton.onclick = function() {
+                document.body.removeChild(modal);
+            };
+            
+            const heading = document.createElement('h3');
+            heading.innerText = 'Cookies Manager';
+            
+            modalContent.appendChild(heading);
+            modalContent.appendChild(cookiesContainer);
+            modalContent.appendChild(closeButton);
+            modal.appendChild(modalContent);
+            
+            document.body.appendChild(modal);
+        }
+
+        // Function to delete a cookie
+        function deleteCookie(name) {
+            // Set expiration date to the past to delete the cookie
+            document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+            console.log(`Cookie "${name}" deleted`);
+            
+            // Refresh the cookie viewer
+            document.body.querySelector('.cookies-list').parentNode.parentNode.parentNode.remove();
+            viewAllCookies();
+        }
+
+        // Add additional style for delete button
+        const style = document.createElement('style');
+        style.textContent = `
+            .delete-btn {
+                padding: 5px 10px;
+                background-color: #f44336;
+                color: white;
+                border: none;
+                border-radius: 3px;
+                cursor: pointer;
+            }
+            .delete-btn:hover {
+                background-color: #d32f2f;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

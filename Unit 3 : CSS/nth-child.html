@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Salary Table</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        table {
+            width: 50%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .highlight {
+            color: #c0221f; 
+            background-color: #92ff8e;
+        }
+    </style>
+</head>
+<body>
+    <h1>Employee Salary Table</h1>
+    <table id="salaryTable">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Position</th>
+                <th>Salary</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>John Doe</td>
+                <td>Software Engineer</td>
+                <td>65000</td>
+            </tr>
+            <tr>
+                <td>Jane Smith</td>
+                <td>Product Manager</td>
+                <td>48000</td>
+            </tr>
+            <tr>
+                <td>Sam Wilson</td>
+                <td>Data Analyst</td>
+                <td>75000</td>
+            </tr>
+            <tr>
+                <td>Emily Davis</td>
+                <td>Designer</td>
+                <td>47000</td>
+            </tr>
+            <tr>
+                <td>Michael Brown</td>
+                <td>CTO</td>
+                <td>120000</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const rows = document.querySelectorAll("#salaryTable tbody tr");
+            
+            rows.forEach(row => {
+                const salaryCell = row.querySelector("td:last-child");
+                const salary = parseInt(salaryCell.textContent, 10);
+                
+                if (salary > 50000) {
+                    row.classList.add("highlight");
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+

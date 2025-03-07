@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vowel or Consonant Checker</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .result {
+            margin-top: 15px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        input {
+            padding: 8px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <h1>check if vowel or consonant</h1>
+    <p>Press any alphabet key to check if it's a vowel or consonant:</p>
+    <input type="text" id="letterInput" maxlength="1">
+    <div class="result" id="result"></div>
+
+    <script>
+        $(document).ready(function(){
+            $("#letterInput").keyup(function(event){
+                let letter = $(this).val().toLowerCase();
+                
+                if(/^[a-zA-Z]$/.test(letter)) {
+                    if(['a', 'e', 'i', 'o', 'u'].includes(letter)) {
+                        $("#result").text(`'${letter}' is a vowel`);
+                    } else {
+                        $("#result").text(`'${letter}' is a consonant`);
+                    }
+                } else if(letter !== "") {
+                    $("#result").text("Please enter an alphabet letter only");
+                } else {
+                    $("#result").text("");
+                }
+            });
+            
+            $("#letterInput").focus();
+        });
+    </script>
+</body>
+</html>

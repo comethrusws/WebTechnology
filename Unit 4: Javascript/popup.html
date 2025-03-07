@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Popup and Alert Boxes</title>
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            border: 1px solid #000;
+            padding: 20px;
+            background-color: #fff;
+            z-index: 1000;
+        }
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+    </style>
+</head>
+<body>
+    <button onclick="getAge()">Click to vote</button>
+
+    <script>
+        function getAge() {
+            let continueloop = true;
+            while (continueloop) {
+                let age = prompt("Enter your age:");
+                if (age === null) {
+                    alert("You canceled the voting process.");
+                    continueloop = false;
+                } else if (age >= 18) {
+                    let con = confirm("Are you sure your age is " + age + " and you wish to vote?");
+                    if (con) {
+                        continueloop = false;
+                        alert("Your age is " + age + " and you voted successfully");
+                    } else {
+                        alert("You canceled the voting process.");
+                        continueloop = false;
+                    }
+                } else {
+                    alert("You must be 18 or older to vote.");
+                }
+            }
+        }
+    </script>
+</body>
+</html>

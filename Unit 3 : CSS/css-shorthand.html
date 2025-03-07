@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Padding and Margin Shorthand</title>
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+
+        .box {
+            width: 150px;
+            height: 150px;
+            background-color: #4CAF50;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Padding shorthand examples */
+        .padding-all {
+            padding: 10px; /* All sides */
+        }
+
+        .padding-vertical-horizontal {
+            padding: 10px 20px; /* Vertical (top/bottom) and Horizontal (left/right) */
+        }
+
+        .padding-top-horizontal-bottom {
+            padding: 10px 20px 30px; /* Top, Horizontal (left/right), Bottom */
+        }
+
+        .padding-all-sides {
+            padding: 10px 20px 30px 40px; /* Top, Right, Bottom, Left */
+        }
+
+        /* Margin shorthand examples */
+        .margin-all {
+            margin: 10px; /* All sides */
+        }
+
+        .margin-vertical-horizontal {
+            margin: 10px 20px; /* Vertical (top/bottom) and Horizontal (left/right) */
+        }
+
+        .margin-top-horizontal-bottom {
+            margin: 10px 20px 30px; /* Top, Horizontal (left/right), Bottom */
+        }
+
+        .margin-all-sides {
+            margin: 10px 20px 30px 40px; /* Top, Right, Bottom, Left */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Padding examples -->
+        <div class="box padding-all">Padding: 10px</div>
+        <div class="box padding-vertical-horizontal">Padding: 10px 20px</div>
+        <div class="box padding-top-horizontal-bottom">Padding: 10px 20px 30px</div>
+        <div class="box padding-all-sides">Padding: 10px 20px 30px 40px</div>
+
+        <!-- Margin examples -->
+        <div class="box margin-all">Margin: 10px</div>
+        <div class="box margin-vertical-horizontal">Margin: 10px 20px</div>
+        <div class="box margin-top-horizontal-bottom">Margin: 10px 20px 30px</div>
+        <div class="box margin-all-sides">Margin: 10px 20px 30px 40px</div>
+    </div>
+</body>
+</html>

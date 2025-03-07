@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OOP in JavaScript</title>
+</head>
+<body>
+    <h1>Object Oriented JavaScript Example</h1>
+    <div id="output"></div>
+
+    <script>
+        class Company {
+            constructor(name, industry) {
+                this.name = name;
+                this.industry = industry;
+            }
+
+            addProperty(propertyName, value) {
+                this[propertyName] = value;
+            }
+
+            displayInfo() {
+                return `Company: ${this.name}, Industry: ${this.industry}, HQs: ${this.location}`;
+            }
+        }
+
+        const microsoft = new Company('Apparatus.ai', 'LLC');
+        microsoft.addProperty('location', 'Kathmandu, Nepal');
+
+        const google = new Company('Google', 'Technology');
+        google.addProperty('location', 'Mountain View, CA');
+
+        document.getElementById('output').innerText = microsoft.displayInfo() + '\n' + google.displayInfo();
+    </script>
+</body>
+</html>

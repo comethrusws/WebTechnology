@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fibonacci Series</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #2e2e2e;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+            width: 100%;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Fibonacci Series</h2>
+        <input type="number" id="userInput" placeholder="Enter a number" />
+        <button onclick="displayFibonacci()">Find Fibonacci Series</button>
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        function findFibonacci(num) {
+            if (isNaN(num) || num <= 0) {
+                return 'Please enter a positive number.';
+            }
+
+            function fibonacci(n) {
+                if (n <= 1) return n;
+                return fibonacci(n - 1) + fibonacci(n - 2);
+            }
+
+            let fibSeries = [];
+            for (let i = 0; i < num; i++) {
+                fibSeries.push(fibonacci(i));
+            }
+
+            return `Fibonacci Series: ${fibSeries.join(', ')}`;
+        }
+
+        function displayFibonacci() {
+            const num = parseInt(document.getElementById('userInput').value);
+            const result = findFibonacci(num);
+            document.getElementById('result').innerText = result;
+        }
+    </script>
+</body>
+</html>

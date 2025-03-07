@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For/In Loop Demo</title>
+</head>
+<body>
+    <h1>For/In Loop in JavaScript</h1>
+    <ul id="studentList"></ul>
+
+    <script>
+        const students = {
+            student1: "Alice",
+            student2: "Bob",
+            student3: "Charlie"
+        };
+
+        let listItems = "";
+        for (let key in students) {
+            listItems += "<li>" + students[key] + "</li>";
+        }
+
+        document.getElementById("studentList").innerHTML = listItems;
+    </script>
+</body>
+</html>

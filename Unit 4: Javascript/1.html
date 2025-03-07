@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Variables</title>
+</head>
+<body>
+    <h1>JavaScript Variables</h1>
+    <p id="demo"></p>
+
+    <script>
+        // Declaring variables
+        var name = "John";
+        let age = 30;
+        const country = "USA";
+
+
+        {
+            var a = 20; // var makes it functio scoped, ie global variable
+            let b = 20; //block scoped ie. lcoal variable
+            document.write(a + b);
+            document.write("<h2>"+(a+b)+"</h2>");
+        }
+
+        // Displaying variables
+        document.getElementById("demo").innerHTML = 
+            "Name: " + name + "<br>" +
+            "Age: " + age + "<br>" +
+            "Country: " + country;
+
+
+    </script>
+</body>
+</html>

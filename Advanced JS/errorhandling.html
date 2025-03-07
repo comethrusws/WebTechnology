@@ -1,0 +1,261 @@
+<button onclick="examplePrecisionError()">Precision Error Example</button>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Error Handling Examples</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        #logArea {
+            height: 400px;
+            overflow-y: auto;
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin: 10px 0;
+            background-color: #f9f9f9;
+        }
+        .info {
+            color: #333;
+        }
+        .error {
+            color: #d9534f;
+            font-weight: bold;
+        }
+        .success {
+            color: #5cb85c;
+        }
+        .warning {
+            color: #f0ad4e;
+        }
+        hr {
+            border: 0;
+            height: 1px;
+            background-color: #ddd;
+            margin: 10px 0;
+        }
+        button {
+            margin: 5px;
+            padding: 8px 16px;
+            background-color: #337ab7;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #286090;
+        }
+        input {
+            padding: 8px;
+            margin: 5px;
+            width: 250px;
+        }
+    </style>
+</head>
+<body>
+    <h1>JavaScript Error Handling Examples</h1>
+    
+    <div>
+        <button onclick="exampleTryCatch()">Try-Catch Example</button>
+        <button onclick="exampleCustomError()">Custom Error Example</button>
+        <button onclick="exampleFinally()">Finally Example</button>
+        <button onclick="exampleNestedTryCatch()">Nested Try-Catch</button>
+        <button onclick="validateUserInput()">Input Validation</button>
+        <button onclick="clearLog()">Clear Log</button>
+    </div>
+    
+    <div id="inputArea">
+        <input type="text" id="userInput" placeholder="Enter a number between 1 and 100">
+    </div>
+    
+    <div id="logArea"></div>
+
+    <script>
+        function log(message, type = 'info') {
+            const logArea = document.getElementById('logArea');
+            const entry = document.createElement('div');
+            entry.className = type;
+            entry.textContent = message;
+            logArea.appendChild(entry);
+            logArea.scrollTop = logArea.scrollHeight;
+        }
+        
+        function clearLog() {
+            document.getElementById('logArea').innerHTML = '';
+        }
+        
+        // Add a separator function to visually separate different operations
+        function addSeparator() {
+            const logArea = document.getElementById('logArea');
+            const separator = document.createElement('hr');
+            logArea.appendChild(separator);
+        }
+        
+        // Modified example functions to not clear the log
+        function exampleTryCatch() {
+            addSeparator();
+            log("Running Try-Catch example...");
+            
+            try {
+                log("Inside try block");
+                // Deliberately cause an error
+                const value = undefinedVariable + 5;
+                log("This line won't execute");
+            } catch (error) {
+                log(`Caught error: ${error.name} - ${error.message}`, 'error');
+                log(`Stack trace: ${error.stack}`, 'error');
+            }
+            
+            log("Execution continues after the try-catch block");
+        }
+        
+        function exampleCustomError() {
+            addSeparator();
+            log("Running Custom Error example...");
+            
+            class ValidationError extends Error {
+                constructor(message) {
+                    super(message);
+                    this.name = "ValidationError";
+                }
+            }
+            
+            try {
+                log("Checking if user is authorized...");
+                const isAuthorized = false;  // Simulating unauthorized state
+                
+                if (!isAuthorized) {
+                    throw new ValidationError("User is not authorized to perform this action");
+                }
+                
+                log("User is authorized", "success");
+            } catch (error) {
+                if (error instanceof ValidationError) {
+                    log(`Validation Error: ${error.message}`, "warning");
+                } else {
+                    log(`Unexpected Error: ${error.message}`, "error");
+                }
+            }
+            
+            log("Custom error handling complete");
+        }
+        
+        function exampleFinally() {
+            addSeparator();
+            log("Running Try-Catch-Finally example...");
+            
+            try {
+                log("Inside try block");
+                log("Attempting to fetch data...");
+                
+                // Simulate an error during data fetch
+                throw new Error("Network connection lost");
+                
+                log("This line won't execute");
+            } catch (error) {
+                log(`Error during fetch: ${error.message}`, "error");
+            } finally {
+                log("Finally block executed - cleaning up resources", "info");
+                log("Connection closed regardless of success or failure");
+            }
+            
+            log("Try-catch-finally example complete");
+        }
+        
+        function exampleNestedTryCatch() {
+            addSeparator();
+            log("Running Nested Try-Catch example...");
+            
+            try {
+                log("Outer try block");
+                
+                try {
+                    log("Inner try block");
+                    // Cause an error
+                    const result = 10 / 0;
+                    log(`Result: ${result}`);  // This won't execute
+                } catch (innerError) {
+                    log(`Inner catch: ${innerError.message}`, "warning");
+                    // Throw a new error to be caught by the outer catch
+                    throw new Error("Error from inner catch");
+                }
+                
+            } catch (outerError) {
+                log(`Outer catch: ${outerError.message}`, "error");
+            }
+            
+            log("Nested try-catch example complete");
+        }
+        
+        function validateUserInput() {
+            addSeparator();
+            log("Validating user input...");
+            
+            const userInput = document.getElementById('userInput').value;
+            
+            try {
+                // Check if input is empty
+                if (!userInput) {
+                    throw new Error("Input cannot be empty");
+                }
+                
+                // Convert to number and validate
+                const number = Number(userInput);
+                
+                if (isNaN(number)) {
+                    throw new Error("Input must be a valid number");
+                }
+                
+                if (number < 1 || number > 100) {
+                    throw new Error("Number must be between 1 and 100");
+                }
+                
+                log(`Valid input: ${number}`, "success");
+            } catch (error) {
+                log(`Validation failed: ${error.message}`, "error");
+            }
+        }
+    </script>
+    <script>
+        
+        function examplePrecisionError() {
+            addSeparator();
+            log("Running Precision Error example...");
+            
+            try {
+                let num = 1.7976931348623157e+308; 
+                log("Starting with a large number: " + num);
+                num = num.toPrecision(21); // Precision of 21 causes Infinity
+                if (num === Infinity) {
+                    throw new RangeError("Number exceeded maximum limit");
+                }
+            } catch (error) {
+                log(`Caught error: ${error.name} - ${error.message}`, 'error');
+            }
+            
+            log("Precision error example complete");
+        }
+        
+        // Adding a specific Range Error example
+        function exampleRangeError() {
+            addSeparator();
+            log("Running Range Error example...");
+            
+            try {
+                let arr = new Array(-1); // Negative array length causes RangeError
+                log("This line won't execute");
+            } catch (error) {
+                log(`Caught error: ${error.name} - ${error.message}`, 'error');
+            }
+            
+            log("Range error example complete");
+        }
+    </script>
+    
+</body>
+</html>

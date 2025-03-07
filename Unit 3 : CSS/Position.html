@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Position Example</title>
+    <style>
+        .relative-box {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background-color: lightblue;
+            top: 20px;
+            left: 20px;
+            visibility: visible; /* Added visibility tag */
+        }
+
+        .absolute-box {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: lightcoral;
+            top: 50px;
+            left: 50px;
+            visibility: visible; /* Added visibility tag */
+        }
+    </style>
+</head>
+<body>
+    <div class="relative-box" style="margin-bottom: 2rem;">
+        This is a relative positioned box.
+        <div class="absolute-box">
+            This is an absolute positioned box.
+        </div>
+    </div>
+
+    <div style="position: relative; width: 400px; height: 470px; display:flex; justify-content: center; align-items: center;">
+        <img src="./hi.jpeg" alt="Sample Image" style="width: 100%; height: 100%;">
+        <div style="position: absolute; top: 10px; left: 10px; z-index: 10; background-color: rgba(255, 255, 255, 0.7); padding: 5px;">
+            ello mate, hiss hiss. iss chewsday innit?.
+        </div>
+    </div>
+</body>
+</html>

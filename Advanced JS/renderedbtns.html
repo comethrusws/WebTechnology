@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- other code remains the same -->
+    <style>
+        /* Keep all existing styles */
+        
+        /* Add style for buttons that will be created */
+        .new-button {
+            margin: 10px 5px;
+            padding: 8px 16px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .new-button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>createElement and appendChild Demo</h1>
+        <button class="btn" id="addElement">Add New Element</button>
+        <div id="content-area">
+            <p>Buttons will appear here when you click the button above.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('addElement').addEventListener('click', function() {
+            // Create a new button element
+            const newButton = document.createElement('button');
+            
+            // Add content and class to the button
+            newButton.textContent = 'Button ' + (document.querySelectorAll('.new-button').length + 1);
+            newButton.className = 'new-button';
+            
+            // Add click event to the new button
+            newButton.addEventListener('click', function() {
+                alert('You clicked: ' + this.textContent);
+            });
+            
+            // Get the content area
+            const contentArea = document.getElementById('content-area');
+            
+            // If it's the first element, clear the placeholder text
+            if (contentArea.querySelector('p')) {
+                contentArea.innerHTML = '';
+            }
+            
+            // Append the new button to the content area
+            contentArea.appendChild(newButton);
+        });
+    </script>
+</body>
+</html>

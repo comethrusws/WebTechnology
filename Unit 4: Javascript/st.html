@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information</title>
+</head>
+<body>
+    <button onclick="addStudent()">Add Student</button>
+    <table id="studentTable" border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Address</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        class Student {
+            constructor(id, name, address, email) {
+                this.id = id;
+                this.name = name;
+                this.address = address;
+                this.email = email;
+            }
+        }
+        
+        function addStudent() {
+            const id = prompt("Enter student ID:");
+            const name = prompt("Enter student name:");
+            const address = prompt("Enter student address:");
+            const email = prompt("Enter student email:");
+        
+            const student = new Student(id, name, address, email);
+            console.log("Student added:", student);
+            addStudentToTable(student);
+        }
+        
+        function addStudentToTable(student) {
+            const table = document.getElementById("studentTable").getElementsByTagName('tbody')[0];
+            const newRow = table.insertRow();
+            
+            const cell1 = newRow.insertCell(0);
+            const cell2 = newRow.insertCell(1);
+            const cell3 = newRow.insertCell(2);
+            const cell4 = newRow.insertCell(3);
+            
+            cell1.innerHTML = student.id;
+            cell2.innerHTML = student.name;
+            cell3.innerHTML = student.address;
+            cell4.innerHTML = student.email;
+        }
+    </script>
+</body>
+</html>

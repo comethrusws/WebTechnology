@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax and JQuery</title>
+    
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.2/themes/smoothness/jquery-ui.css">
+    
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+        }
+        .demo-section {
+            margin-bottom: 30px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .highlight {
+            background-color: yellow;
+        }
+        #usersList {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>jQuery, jQuery UI and AJAX</h1>
+        
+        <div class="demo-section">
+            <h2>jQuery Basic Demo</h2>
+            <button id="toggleButton">Hide/Show Content</button>
+            <p id="toggleParagraph">This paragraph will be hidden or shown when you click the button.</p>
+            
+            <button id="highlightButton">Highlight Text</button>
+            <p id="highlightText">This text can be highlighted with jQuery.</p>
+        </div>
+        
+        <div class="demo-section">
+            <h2>jQuery UI Demo</h2>
+            
+            <div id="accordion">
+                <h3>Section 1</h3>
+                <div>
+                    <p>This is the content for section 1 using jQuery UI Accordion.</p>
+                </div>
+                <h3>Section 2</h3>
+                <div>
+                    <p>This is the content for section 2 using jQuery UI Accordion.</p>
+                </div>
+                <h3>Section 3</h3>
+                <div>
+                    <p>This is the content for section 3 using jQuery UI Accordion.</p>
+                </div>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <p>Select a date: <input type="text" id="datepicker"></p>
+            </div>
+            
+            <div style="margin-top: 20px;">
+                <div id="slider"></div>
+                <p>Value: <span id="sliderValue">50</span></p>
+            </div>
+        </div>
+        
+        <div class="demo-section">
+            <h2>AJAX Demo</h2>
+            <button id="loadUsersButton">Load Users via AJAX</button>
+            <div id="usersList">Users will appear here...</div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#toggleButton").click(function() {
+                $("#toggleParagraph").toggle();
+            });
+            
+            $("#highlightButton").click(function() {
+                $("#highlightText").toggleClass("highlight");
+            });
+            
+            $("#accordion").accordion({
+                collapsible: true
+            });
+            
+            $("#datepicker").datepicker();
+            
+            $("#slider").slider({
+                min: 0,
+                max: 100,
+                value: 50,
+                slide: function(event, ui) {
+                    $("#sliderValue").text(ui.value);
+                }
+            });
+            
+            $("#loadUsersButton").click(function() {
+                $.ajax({
+                    url: "https://jsonplaceholder.typicode.com/users",
+                    method: "GET",
+                    dataType: "json",
+                    beforeSend: function() {
+                        $("#usersList").html("<p>Loading users...</p>");
+                    },
+                    success: function(data) {
+                        let userHtml = "<ul>";
+                        $.each(data, function(index, user) {
+                            userHtml += "<li>" + user.name + " (" + user.email + ")</li>";
+                        });
+                        userHtml += "</ul>";
+                        $("#usersList").html(userHtml);
+                    },
+                    error: function(xhr, status, error) {
+                        $("#usersList").html("<p>Error loading users: " + error + "</p>");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html></div>
